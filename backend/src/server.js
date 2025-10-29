@@ -3,10 +3,11 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-import notesRoutes from "./routes/notesRoutes.js";
 import { connectDB } from "./config/db.js";
-import rateLimiter from "./middleware/rateLimiter.js";
 import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import notesRoutes from "./routes/notesRoutes.js";
+import rateLimiter from "./middleware/rateLimiter.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(rateLimiter);
 
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/notes", notesRoutes);
 
 connectDB().then(() => {
